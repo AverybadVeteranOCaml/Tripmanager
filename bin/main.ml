@@ -133,8 +133,8 @@ let solveRoad stations network =
         | _ -> List.rev (List.flatten acc)
     in aux (List.hd stations) (List.tl stations) []
 
-module TrainImpl = Trainmanager.Trip.Train
-module RoadImpl = Trainmanager.Trip.Road
+module TrainImpl = Trainmanager.Train
+module RoadImpl = Trainmanager.Road
 module Journey = Trainmanager.Trip.MakeJourney(TrainImpl)(RoadImpl)
 
 module TripManager = struct
