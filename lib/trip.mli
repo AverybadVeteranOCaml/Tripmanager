@@ -1,8 +1,7 @@
 open Train
-open Road
 
 module MakeJourney :
-  functor (TrainImpl : Train) (RoadImpl : Road) ->
+  functor (TrainImpl : Train) (RoadImpl : Road.Road) ->
     sig
       type t = { train : TrainImpl.t; route : RoadImpl.t; id : int }
       val create : TrainImpl.t -> RoadImpl.t -> int list -> t

@@ -1,7 +1,6 @@
 open Train
-open Road
 
-module MakeJourney = functor (TrainImpl : Train) (RoadImpl : Road) -> struct
+module MakeJourney = functor (TrainImpl : Train) (RoadImpl : Road.Road) -> struct
   type t = { train : TrainImpl.t; route : RoadImpl.t ; id : int}
 
   let create train route tripIds =

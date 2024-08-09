@@ -1,21 +1,21 @@
-module type Road = sig
-  type segment = {
+module type Road =  sig
+    type segment = {
       start_station : string;
       end_station : string;
       departure_time : string;
       arrival_time : string;
       date : string;
-      arrival_date : string
-  }
-  type t
-  val create : string list -> string -> string -> string -> t
-  val get_segments : t -> segment list
-  val segment_toString : segment list -> string
-  val are_segments_similar : segment list -> segment list -> bool
-
-end
+      arrival_date : string;
+    }
+    type t
+    val create : string list -> string -> string -> string -> t
+    val get_segments : t -> segment list
+    val segment_toString : segment list -> string
+    val are_segments_similar : segment list -> segment list -> bool
+  end
 
 module Road : Road = struct
+
   type segment = {
       start_station : string;
       end_station : string;
@@ -66,12 +66,12 @@ let get_arrival_time startTime distance trainType =
     let startTimeHourPart = List.nth stSplit 0 in
     let startTimeMinutePart = List.nth stSplit 1 in
     let startTimeInMinutes = ((int_of_string startTimeHourPart) * 60) + (int_of_string startTimeMinutePart) in
-    let durationInMinutes = (float_of_int distance /. 210.0) *. 60.0 in
+    let durationInMinutes = (float_of_int distance /. ((Train.Train.getTrainSpeed trainType))) *. 60.0 in
     let integerDurationInMinutes = int_of_float (Float.floor durationInMinutes) in
     let arrivalTimeInMinutes = startTimeInMinutes + integerDurationInMinutes in
     let arrivalTimeHoursPart = (arrivalTimeInMinutes / 60) mod 24 in
     let arrivalTimeMinutesPart = arrivalTimeInMinutes mod 60 in
-    string_of_int arrivalTimeHoursPart ^ ":" ^ string_of_int arrivalTimeMinutesPart ^ trainType
+    string_of_int arrivalTimeHoursPart ^ ":" ^ string_of_int arrivalTimeMinutesPart
 
 let add_minutes currentHour additionalMinutes =
     let chSplit = String.split_on_char ':' currentHour in
@@ -166,4 +166,3 @@ let crossedADay startTime arrivalTime =
     in aux lhs rhs
 
 end
-

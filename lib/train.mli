@@ -10,4 +10,5 @@ module type Train =
     val check_station_network : string -> string list -> bool
     val get_associated_network : string -> string list
   end
+module Train : Train
 
